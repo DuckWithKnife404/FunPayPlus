@@ -1,18 +1,12 @@
 # FunPayPlus
 
-Неофициальный Python клиент для FunPay
-
-ВНИМАНИЕ: Только для образовательных целей! Проект создан для обучения и демонстрации навыков. Используйте на свой страх и риск.
+Библиотека для взаимодействия с FunPay
 
 
 ## Установка
 
-pip install requests beautifulsoup4
-
-Или склонируйте репозиторий:
-
-git clone https://github.com/yourusername/funpayplus.git
-cd funpayplus
+git clone https://github.com/DuckWithKnife404/FunPayPlus.git
+cd FunPayPlus
 pip install -r requirements.txt
 
 
@@ -20,13 +14,9 @@ pip install -r requirements.txt
 
 from funpayplus import Account
 
-# Создаем объект аккаунта
 account = Account("ваш_golden_key", "ваш_user_agent")
-
-# Получаем все данные
 account.get()
 
-# Выводим информацию
 print(account)
 
 
@@ -40,9 +30,10 @@ print(account)
 - active_buy (int) - Количество активных покупок
 - active_message (int) - Количество непрочитанных сообщений (из профиля)
 - rating (float) - Рейтинг пользователя (0.0 - 5.0)
-- data (str) - Дата регистрации и другая информация
+- data (str) - Дата регистрации
 - id (int) - ID пользователя
 - unread (int) - Количество непрочитанных сообщений (из чата)
+- url (str) - Ссылка на профиль пользователя
 
 
 ## Методы
@@ -69,6 +60,7 @@ account = Account("ваш_golden_key", "Mozilla/5.0...")
 
 Пример:
 success = account.get()
+
 if success:
     print(f"Баланс: {account.balance}₽")
 else:
@@ -85,17 +77,9 @@ else:
 
 Пример:
 account.event()
+
 if account.unread > 0:
     print(f"У вас {account.unread} непрочитанных сообщений!")
-
-
-### __str__() -> str
-
-Возвращает строковое представление аккаунта.
-
-Пример:
-print(account)
-# Вывод: Account(id=12345, username='JohnDoe', balance=1000.0₽)
 
 
 ## Вспомогательные методы (внутренние)
@@ -128,13 +112,9 @@ print(account)
 
 from funpayplus import Account
 
-# Создаем экземпляр аккаунта
 account = Account("ваш_golden_key", "ваш_user_agent")
-
-# Получаем данные
 account.get()
 
-# Выводим всю информацию
 print(f"Имя пользователя: {account.username}")
 print(f"Баланс: {account.balance}₽")
 print(f"Рейтинг: {account.rating}/5")
@@ -143,9 +123,10 @@ print(f"Активных покупок: {account.active_buy}")
 print(f"Сообщений: {account.active_message}")
 print(f"ID: {account.id}")
 print(f"Дата регистрации: {account.data}")
+print(f"Ссылка на профиль: {account.url}")
 
-# Проверяем чат
 account.event()
+
 if account.unread > 0:
     print(f"У вас {account.unread} непрочитанных сообщений!")
 
@@ -183,7 +164,8 @@ if account.event():
 2. Откройте DevTools (нажмите F12)
 3. Перейдите на вкладку Network (Сеть)
 4. Обновите страницу (F5)
-5. Нажмите на любой запрос к funpay.com
+5. Нажмите на запрос с названием "(Ваш ID)/" к funpay.com
+   Пример: 123456/
 6. В Request Headers найдите заголовок Cookie
 7. Найдите golden_key=ВАШ_ТОКЕН_ЗДЕСЬ
 
@@ -203,4 +185,4 @@ Cookie: golden_key=3vjjfr7ka4whckevijz8t9epj2vwg215; ...
 
 DuckWithKnife404
 
-GitHub: [\[ссылка на ваш GitHub\]](https://github.com/DuckWithKnife404)
+GitHub: https://github.com/DuckWithKnife404

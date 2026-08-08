@@ -17,6 +17,7 @@ class Account:
         self.data = ""
         self.id = 0
         self.unread = 0
+        self.url = ""
 
     def _safe_text(self, element):
         return element.text.strip() if element else ""
@@ -59,12 +60,14 @@ class Account:
             self.active_message = self._safe_int(
                 soup.find("span", {"class": "badge badge-chat"})
             )
+            
 
             user_link = soup.find("a", {"class": "user-link-dropdown"})
             if user_link and user_link.get("href"):
                 id_match = re.search(r"/users/(\d+)/", user_link["href"])
                 if id_match:
                     self.id = int(id_match.group(1))
+                    self.url = f"https://funpay.com/users/{self.id}/"
 
             if self.id:
                 profile_response = requests.get(
